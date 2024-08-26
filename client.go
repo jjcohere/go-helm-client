@@ -337,8 +337,7 @@ func (c *HelmClient) install(ctx context.Context, spec *ChartSpec, opts *Generic
 		return nil, err
 	}
 
-	p := getter.All(c.Settings)
-	values, err := spec.GetValuesMap(p)
+	values, err := spec.GetValuesMap(c.Providers)
 	if err != nil {
 		return nil, err
 	}
@@ -387,8 +386,7 @@ func (c *HelmClient) upgrade(ctx context.Context, spec *ChartSpec, opts *Generic
 		return nil, err
 	}
 
-	p := getter.All(c.Settings)
-	values, err := spec.GetValuesMap(p)
+	values, err := spec.GetValuesMap(c.Providers)
 	if err != nil {
 		return nil, err
 	}
@@ -521,8 +519,7 @@ func (c *HelmClient) TemplateChart(spec *ChartSpec, options *HelmTemplateOptions
 		return nil, err
 	}
 
-	p := getter.All(c.Settings)
-	values, err := spec.GetValuesMap(p)
+	values, err := spec.GetValuesMap(helmClient.Providers)
 	if err != nil {
 		return nil, err
 	}
@@ -558,8 +555,7 @@ func (c *HelmClient) LintChart(spec *ChartSpec) error {
 		return err
 	}
 
-	p := getter.All(c.Settings)
-	values, err := spec.GetValuesMap(p)
+	values, err := spec.GetValuesMap(c.Providers)
 	if err != nil {
 		return err
 	}
